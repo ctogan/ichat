@@ -32,6 +32,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
     - php artisan db:seed --class=EventSeeder
     - php artisan db:seed --class=PurchaseTransactionSeeder
     - php artisan db:seed --class=VouchersSeeder
+6. Run php artisan schedule:run
 7. Go to http::127.0.0.1:8000/api/documentation => Swagger Page *port is depend your local
 
 ##How it work

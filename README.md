@@ -32,8 +32,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
     - php artisan db:seed --class=EventSeeder
     - php artisan db:seed --class=PurchaseTransactionSeeder
     - php artisan db:seed --class=VouchersSeeder
-6. Run php artisan schedule:run
-7. Go to http::127.0.0.1:8000/api/documentation => Swagger Page *port is depend your local
+6. Go to http::127.0.0.1:8000/api/documentation => Swagger Page *port is depend your local
 
 ##How it work
 
@@ -51,3 +50,4 @@ Ada 5 alamat api yang saya buat. Anda dapat menemukan nya di folder routes/api.p
    * mohon diperhatikan agar melakukan upload menggunakan aplikasi seperti postman, dikarenakan ada kesalahan configurasi di swagger sehingga swagger tidak dapat melakukan upload
 5. Untuk API IMAGE CHECKER dapat mengirimkan response, maka akan memanggil api /callback/validation/image.
 6. Terdapat function task scheduler untuk melakukan perintah pengembalian voucher secara otomatis (is_used = false) apabila user tidak melakukan upload lebih dari 10 menit.
+   Saat ini task scheduler berjalan daily, tetapi jika menggunakan nya secara manual jalankan perintah "php artisan schedule:run"

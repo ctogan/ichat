@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/event',[GeneralController::class, 'get_event']);
+Route::get('/event/detail',[GeneralController::class, 'get_event_detail']);
 Route::post('/event/reedem',[GeneralController::class, 'reedem']);
 Route::post('/event/reedem/upload',[GeneralController::class, 'upload']);
-
 Route::post('/callback/validation/image',[GeneralController::class, 'callback']);

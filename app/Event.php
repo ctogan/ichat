@@ -19,4 +19,6 @@ class Event extends Model
         'updated_at'
     ];
 
+
+
 }

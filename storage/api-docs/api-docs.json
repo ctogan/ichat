@@ -20,6 +20,31 @@
                 }
             }
         },
+        "/api/event/detail": {
+            "get": {
+                "tags": [
+                    "event-list"
+                ],
+                "summary": "Event list",
+                "description": "show all active event",
+                "operationId": "63b8a8feba93b06573919398667f169d",
+                "parameters": [
+                    {
+                        "name": "voucher_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event list"
+                    }
+                }
+            }
+        },
         "/api/event/reedem": {
             "post": {
                 "tags": [

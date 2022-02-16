@@ -18,6 +18,7 @@ class CreateVouchers extends Migration
             $table->bigInteger('event_id')->unsigned();
             $table->string('voucher_code');
             $table->string('image');
+            $table->boolean('is_used')->default(false);
             $table->timestamps();
         });
 

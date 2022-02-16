@@ -26,4 +26,27 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 2. create and setup database in env file
 3. Run php artisan optimize:clear  => clear cache
 4. Run php artisan migrate => migrate database
-5. Run php artisan db:seed => insert data to database
+5. Run php artisan db:seed => insert data to database.
+    if not working, we can run one by one
+    - php artisan db:seed --class=CustomersSeeder
+    - php artisan db:seed --class=EventSeeder
+    - php artisan db:seed --class=PurchaseTransactionSeeder
+    - php artisan db:seed --class=VouchersSeeder
+7. Go to http::127.0.0.1:8000/api/documentation => Swagger Page *port is depend your local
+
+##How it work
+
+Ada 5 alamat api yang saya buat. Anda dapat menemukan nya di folder routes/api.php 
+1. Frontend akan mengambil semua data event dengan menggunakan alamat api : api/event
+2. Untuk melihat voucher pada event tersebut yang masih aktif menggunakan api : api/event/detail
+3. Untuk Reedem Voucher gunakan api : api/event/reedem. validasi yang digunakan adalah
+    - check voucher apakah tersedia
+    - existing user
+    - minimal transaksi
+    - minimal melakukan transaksi
+4. Untuk upload image akan menggunakan api api/event/reedem/upload. validasi yang digunakan adalah  
+   - waktu upload < 10 menit. Jika waktu lebih dari 10 menit, maka status is_used di voucher akan di kembalikan menjadi false
+   - Jika waktu kurang dari 10 menit, maka akan memanggil API IMAGE CHECKER.
+   * mohon diperhatikan agar melakukan upload menggunakan aplikasi seperti postman, dikarenakan ada kesalahan configurasi di swagger sehingga swagger tidak dapat melakukan upload
+5. Untuk API IMAGE CHECKER dapat mengirimkan response, maka akan memanggil api /callback/validation/image.
+6. Terdapat function task scheduler untuk melakukan perintah pengembalian voucher secara otomatis (is_used = false) apabila user tidak melakukan upload lebih dari 10 menit.

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api;
 use App\Event;
+use App\Http\Resources\EventResources;
+use App\Http\Resources\voucherResources;
 use App\PurchaseTransaction;
 use App\Reedem;
 use App\ViewPurchase;
@@ -28,6 +30,34 @@ class GeneralController extends Api
 
     function get_event(){
         $response = Event::get();
+        return $this->successResponse($response);
+    }
+
+    /**
+     * @OA\Get (
+     * path="/api/event/detail",
+     * summary="Event list",
+     * description="show all active event",
+     * tags={"event-list"},
+     *     @OA\Parameter(
+     *          name="voucher_id",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     * @OA\Response(
+     *     response=200,
+     *     description="Event list"
+     *   )
+     * )
+     */
+
+    function get_event_detail(Request $request){
+
+        $event = Event::where('id',$request->voucher_id)->first();
+        $response = new EventResources($event);
         return $this->successResponse($response);
     }
 
@@ -60,7 +90,7 @@ class GeneralController extends Api
      * )
      */
     function reedem(Request $request){
-
+        $now = date('Y-m-d H:i:s');
         $customer_id = $request->customer_id;
         $voucher_id = $request->voucher_id;
 
@@ -90,7 +120,14 @@ class GeneralController extends Api
             'status'=>'waiting',
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
-
+        if($reedem){
+            Voucher::where([
+                ['id',$voucher_id],
+            ])->update([
+                'is_used'=> true,
+                'updated_at' => $now,
+            ]);
+        }
         return $this->successResponse($reedem);
     }
 
@@ -164,6 +201,14 @@ class GeneralController extends Api
                 'status'=> 'expired',
                 'updated_at' => $now,
             ]);
+
+            Voucher::where([
+                ['id',$voucher_id],
+            ])->update([
+                'is_used'=> false,
+                'updated_at' => $now,
+            ]);
+
             return $this->errorResponse(static::ERROR_MIN_DURATION,static::CODE_ERROR_MIN_DURATION);
         }else{
 
@@ -209,6 +254,7 @@ class GeneralController extends Api
             'status'=>$status,
             'updated_at' => $now,
         ]);
+
 
         return response()->json(['status'=> 'success', 'code' => '200']);
 

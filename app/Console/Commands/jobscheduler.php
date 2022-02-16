@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Reedem;
+use App\Voucher;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -52,6 +53,13 @@ class jobscheduler extends Command
                 ['id',$reedem->id],
             ])->update([
                 'status'=> 'expired',
+                'updated_at' => $now,
+            ]);
+
+            Voucher::where([
+                ['id',$reedem->voucher_id],
+            ])->update([
+                'is_used'=> false,
                 'updated_at' => $now,
             ]);
         }

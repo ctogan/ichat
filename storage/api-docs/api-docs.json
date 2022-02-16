@@ -1,0 +1,98 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ichat API's",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/event": {
+            "get": {
+                "tags": [
+                    "event-list"
+                ],
+                "summary": "Event list",
+                "description": "show all active event",
+                "operationId": "ab27d3d293d8339e9689000de33b2063",
+                "responses": {
+                    "200": {
+                        "description": "Event list"
+                    }
+                }
+            }
+        },
+        "/api/event/reedem": {
+            "post": {
+                "tags": [
+                    "reedem-voucher"
+                ],
+                "summary": "reedem voucher",
+                "description": "insert to reedem",
+                "operationId": "1e686601c68c81a2a92acf29723172a7",
+                "parameters": [
+                    {
+                        "name": "customer_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "voucher_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reedem voucher success"
+                    }
+                }
+            }
+        },
+        "/api/event/reedem/upload": {
+            "post": {
+                "tags": [
+                    "reedem-voucher"
+                ],
+                "summary": "reedem voucher",
+                "description": "insert to reedem",
+                "operationId": "7c54b86d2ded3c1d72d6d72aa5292a49",
+                "parameters": [
+                    {
+                        "name": "customer_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "voucher_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "image_file",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reedem voucher success"
+                    }
+                }
+            }
+        }
+    }
+}
